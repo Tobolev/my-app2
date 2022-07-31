@@ -1,10 +1,10 @@
 import './CostForm.css';
 import React, {useState} from 'react';
 
-const ConstForm = () => {
-    const [costName, setCostName] = useState('');
-    const [costAmount, setCostAmount] = useState('');
-    const [costDate, setCostDate] = useState('');
+const ConstForm = (props) => {
+    const [inputName, setInputName] = useState('');
+    const [inputAmount, setInputAmount] = useState('');
+    const [inputDate, setInputDate] = useState('');
 
 /*     const [userInput, setUserInput] = useState({
         name: '',
@@ -13,7 +13,7 @@ const ConstForm = () => {
     }); */
 
     const costNameChangeHandler = (event) => {
-        setCostName(event.target.value);
+        setInputName(event.target.value);
 /*         setUserInput({
             ...userInput,
             name: event.target.value
@@ -28,7 +28,7 @@ const ConstForm = () => {
     };
 
     const costAmountChangeHandler = (event) => {
-        setCostAmount(event.target.value);
+        setInputAmount(event.target.value);
 /*         setUserInput({
             ...userInput,
             amount: event.target.value
@@ -38,7 +38,7 @@ const ConstForm = () => {
     };
 
     const costDateChangeHandler = (event) => {
-        setCostDate(event.target.value);
+        setInputDate(event.target.value);
 /*         setUserInput({
             ...userInput,
             date: event.target.value
@@ -48,19 +48,35 @@ const ConstForm = () => {
 
     };
 
-    return <form>
+    const submitHandler = (event) => {
+        event.preventDefault();
+        
+        const CostData = {
+            name: inputName,
+            amount: inputAmount,
+            date: new Date(inputDate)
+        };
+
+        props.onSaveCostData(CostData);
+        setInputName('');
+        setInputAmount('');
+        setInputDate('');
+    };
+
+    return (
+    <form onSubmit={submitHandler}>
         <div className='new-cost__controls'>
             <div className='new-cost__control label'>
                 <label>Название</label>
-                <input type = 'text' onChange={costNameChangeHandler}/>
+                <input type = 'text' value={inputName} onChange={costNameChangeHandler}/>
             </div>
             <div className='new-cost__control label'>
                 <label>Сумма</label>
-                <input type = 'number' min='0.01' step='0.01' onChange={costAmountChangeHandler}/>
+                <input type = 'number' value={inputAmount} min='0.01' step='0.01' onChange={costAmountChangeHandler}/>
             </div>
             <div className='new-cost__control label'>
                 <label>Дата</label>
-                <input type = 'date' min='2019-01-91' step='2022-12-31' onChange={costDateChangeHandler}/>
+                <input type = 'date' value={inputDate} min='2019-01-91' step='2022-12-31' onChange={costDateChangeHandler}/>
             </div>
             <div className='new-cost__actions'>
                 <button type='submit'>Добавить Расход</button>
@@ -70,6 +86,7 @@ const ConstForm = () => {
             </div>
         </div>
     </form>
-}
+    );
+};
 
 export default ConstForm;
