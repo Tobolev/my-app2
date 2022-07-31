@@ -16,21 +16,12 @@ const Costs = (props) => {
     <div>
         <Card>
             <CostsFilter year={selectedYear} onChangeYear={yearChangeHadler}/>
-            <CostItem 
-                costDate={props.costs[0].costDate}
-                costName={props.costs[0].costName}
-                costAmount={props.costs[0].costAmount}
-            ></CostItem>
-            <CostItem
-                costDate={props.costs[1].costDate}
-                costName={props.costs[1].costName}
-                costAmount={props.costs[1].costAmount}
-            ></CostItem>
-            <CostItem
-                costDate={props.costs[2].costDate}
-                costName={props.costs[2].costName}
-                costAmount={props.costs[2].costAmount}
-            ></CostItem>
+            {props.costs.map(cost => <CostItem 
+                            costDate={cost.costDate}
+                            costName={cost.costName}
+                            costAmount={cost.costAmount}
+            />
+            )}
         </Card>
     </div>
     );

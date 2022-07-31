@@ -52,9 +52,9 @@ const ConstForm = (props) => {
         event.preventDefault();
         
         const CostData = {
-            name: inputName,
-            amount: inputAmount,
-            date: new Date(inputDate)
+            costName: inputName,
+            costAmount: inputAmount,
+            costDate: new Date(inputDate)
         };
 
         props.onSaveCostData(CostData);
