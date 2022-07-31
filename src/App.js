@@ -17,7 +17,7 @@ const INITIAL_COSTS = [
    },
    {
     id: 'c3',
-    costDate: new Date(2021, 2, 12),
+    costDate: new Date(2022, 2, 12),
     costName: 'Телефон',
     costAmount: 129.99
    },
@@ -32,6 +32,8 @@ const App = () => {
       return [cost, ...prevCosts]
     });
   };
+  
+  console.log(costs);
 
   return (
     <div> 

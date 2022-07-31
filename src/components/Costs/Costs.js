@@ -1,8 +1,8 @@
 import './Costs.css';
-import CostItem from "./CostItem";
 import Card from '../UI/Card';
 import CostsFilter from './CostsFilter';
 import React, {useState} from 'react';
+import CostList from './CostList';
 
 const Costs = (props) => {
 
@@ -12,16 +12,17 @@ const Costs = (props) => {
         setSelectedYear(year);
     };
 
+    const filtredCosts = props.costs.filter(cost => {
+        
+        return cost.costDate.getFullYear().toString() === selectedYear;
+    })
+
     return (
     <div>
         <Card>
-            <CostsFilter year={selectedYear} onChangeYear={yearChangeHadler}/>
-            {props.costs.map(cost => <CostItem 
-                            costDate={cost.costDate}
-                            costName={cost.costName}
-                            costAmount={cost.costAmount}
-            />
-            )}
+            <CostsFilter year={selectedYear}
+             onChangeYear={yearChangeHadler} />
+            <CostList costs={filtredCosts}/>
         </Card>
     </div>
     );
